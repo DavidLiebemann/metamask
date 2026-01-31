@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1456884693111398601}
   - component: {fileID: 4655578294404105621}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Logic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 7257068447764373356}
   - component: {fileID: 3813382016728395837}
   - component: {fileID: 2693050524854997847}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 6354712896874486238}
   - component: {fileID: 2007034229352374431}
   - component: {fileID: 3440497724995069107}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5356100297512691500}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TestPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
