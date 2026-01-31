@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,8 +22,12 @@ public class DrawZone : MonoBehaviour
     protected virtual void Awake()
     {
         MeshRenderer = GetComponent<MeshRenderer>();
-
         initialTexture = DrawTexture;
+    }
+
+    private IEnumerator Start()
+    {
+        yield return new WaitForSeconds(0.1f);
         CreateTexture();
     }
 
