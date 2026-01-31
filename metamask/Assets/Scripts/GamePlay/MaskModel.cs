@@ -21,6 +21,17 @@ namespace GamePlay
             }
         }
 
+        private Texture2D _imposterMask;
+        public Texture2D ImposterMask
+        {
+            get => _imposterMask;
+            set
+            {
+                _imposterMask = value;
+                OnMaskChanged?.Invoke();
+            }
+        }
+
         public Action OnMaskChanged;
     }
 }

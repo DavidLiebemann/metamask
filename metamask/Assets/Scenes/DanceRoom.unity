@@ -896,6 +896,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5657558020906343813, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
+      propertyPath: managedReferences[6207046219169530110].ShadowStrengthCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657558020906343813, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
+      propertyPath: managedReferences[6207046219169530110].ShadowStrengthCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657558020906343813, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
+      propertyPath: managedReferences[6207046219169530110].ShadowStrengthCurve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657558020906343813, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
+      propertyPath: managedReferences[6207046219169530110].ShadowStrengthCurve.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657983014428632621, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
+      propertyPath: m_SpotAngle
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657983014428632621, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657983014428632621, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
+      propertyPath: m_Shadows.m_Strength
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8177585926978977677, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
       propertyPath: m_Name
       value: Dancer

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1456884693111398601}
   - component: {fileID: 4655578294404105621}
   - component: {fileID: 8839182415779225730}
+  - component: {fileID: 8850989889608232480}
   m_Layer: 6
   m_Name: Logic
   m_TagString: Untagged
@@ -48,6 +49,7 @@ MonoBehaviour:
   maskSurface: {fileID: 3813382016728395837}
   maskData: {fileID: 11400000, guid: d064a024fac77724ebd94093bb10d7e7, type: 2}
   outline: {fileID: 5315497216028002366}
+  feedback: {fileID: 8850989889608232480}
 --- !u!135 &8839182415779225730
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -69,6 +71,45 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8850989889608232480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630503685838030081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fabf6b8aa2d64eac9899485dcdd6f7a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MetaMask::GamePlay.DancerSelectionFeedback
+  duration: 3
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spotlight: {fileID: 5657983014428632621}
+  spotlightIntensity: {x: 0, y: 50}
 --- !u!1 &2411751812038103893
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,7 +121,6 @@ GameObject:
   - component: {fileID: 5687633517203551470}
   - component: {fileID: 5657983014428632621}
   - component: {fileID: 3613616773058172257}
-  - component: {fileID: 3042025180748403879}
   m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
@@ -114,13 +154,13 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 5
+  m_Intensity: 0
   m_Range: 10
-  m_SpotAngle: 21.802078
-  m_InnerSpotAngle: 21.802078
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 20
   m_CookieSize2D: {x: 0.5, y: 0.5}
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -197,52 +237,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!114 &3042025180748403879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2411751812038103893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74afe8fa850212e4cb811213ee9ae400, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: MoreMountains.Tools::MoreMountains.Feedbacks.MMSpringLightIntensity
-  OnEquilibriumReached:
-    m_PersistentCalls:
-      m_Calls: []
-  Target: {fileID: 5657983014428632621}
-  TimeScaleMode: 1
-  ChannelMode: 0
-  Channel: 0
-  MMChannelDefinition: {fileID: 0}
-  FloatSpring:
-    Damping: 0.4
-    Frequency: 6
-    ClampSettings:
-      ClampMin: 0
-      ClampMinValue: 0
-      ClampMinInitial: 0
-      ClampMinBounce: 0
-      ClampMax: 0
-      ClampMaxValue: 10
-      ClampMaxInitial: 0
-      ClampMaxBounce: 0
-    SpringDebug:
-      CurrentValue: 0
-      TargetValue: 0
-    UnifiedSpring: 0
-    CurrentValueDisplay: 0
-    TargetValueDisplay: 0
-    VelocityDisplay: 0
-  MoveToRandomValue: {x: -2, y: 2}
-  BumpAmountRandomValue: {x: 20, y: 100}
-  TestMoveToValue: 2
-  MoveToToolbar: 0
-  TestBumpAmount: 75
-  BumpToToolbar: 0
-  OtherControlsToToolbar: 0
 --- !u!1 &3473625853504713572
 GameObject:
   m_ObjectHideFlags: 0
