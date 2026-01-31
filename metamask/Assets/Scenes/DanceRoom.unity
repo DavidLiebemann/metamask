@@ -550,7 +550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8177585926978977677, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
       propertyPath: m_Name
-      value: TestPlayer (1)
+      value: Dancer3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -612,7 +612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8177585926978977677, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
       propertyPath: m_Name
-      value: TestPlayer (2)
+      value: Dancer2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -898,7 +898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8177585926978977677, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
       propertyPath: m_Name
-      value: TestPlayer
+      value: Dancer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
