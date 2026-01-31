@@ -1,16 +1,32 @@
 using System;
+using GamePlay;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class CameraMirrorSelectionLogic : MonoBehaviour
 {
-    private CameraMirror _activeMirror;
+    [Header("Input")] [SerializeField] private LayerMask selectionLayer;
+
+    [SerializeField] private InputActionReference selectPressed;
+    [SerializeField] private InputActionReference selectionPosition;
+
+
+    private IInteractable _currentlyHovered;
 
     private void Awake()
     {
         SceneManager.sceneLoaded += SceneManagerOnsceneLoaded;
+        Assert.IsNotNull(selectionPosition);
+        Assert.IsNotNull(selectPressed);
+    }
+
+    private void OnEnable()
+    {
+        selectPressed.action.Enable();
+        selectionPosition.action.Enable();
     }
 
     private void OnDestroy()
@@ -28,41 +44,69 @@ public class CameraMirrorSelectionLogic : MonoBehaviour
             int randomIndex = Random.Range(0, numCameras);
             for (int i = 0; i < numCameras; i++)
             {
-                allCameraMirrors[i].SetMirrorUsed(randomIndex == i);
+                allCameraMirrors[i].OnSelect(gameObject, randomIndex == i);
             }
-
-            _activeMirror = allCameraMirrors[randomIndex];
         }
     }
 
-    private void SwitchToMirror(CameraMirror target)
-    {
-        CameraMirror[] allCameraMirrors =
-            FindObjectsByType<CameraMirror>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-        foreach (CameraMirror mirror in allCameraMirrors)
-        {
-            mirror.SetMirrorUsed(target == mirror);
-        }
-
-        _activeMirror = target;
-    }
 
     private void Update()
     {
-        if (_activeMirror)
+        if (Camera.allCamerasCount > 0)
         {
-            if (Mouse.current.leftButton.isPressed)
+            Camera currentCamera = Camera.allCameras[0];
+            if (currentCamera)
             {
-                Ray ray = _activeMirror.HandledCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-                if (Physics.Raycast(ray, out var hit))
+                Ray selectionRay =
+                    currentCamera.ScreenPointToRay(selectionPosition.action.ReadValue<Vector2>());
+                if (Physics.Raycast(selectionRay, out var hit, 1000.0f, selectionLayer))
                 {
-                    CameraMirror clickedMirror = hit.collider.GetComponent<CameraMirror>();
-                    if (clickedMirror)
+                    IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+                    if (interactable != _currentlyHovered)
                     {
-                        SwitchToMirror(clickedMirror);
+                        SetCurrentHover(false);
+                    }
+
+                    _currentlyHovered = interactable;
+                    if (null != _currentlyHovered)
+                    {
+                        SetCurrentHover(true);
+                        if (selectPressed.action.IsPressed())
+                        {
+                            SetCurrentSelect(true);
+                        }
+                        else
+                        {
+                            SetCurrentSelect(false);
+                        }
                     }
                 }
+                else
+                {
+                    SetCurrentHover(false);
+                    SetCurrentSelect(false);
+                }
+            }
+        }
+        
+    }
+
+    private void SetCurrentSelect(bool newValue)
+    {
+        if (null != _currentlyHovered)
+        {
+            _currentlyHovered.OnSelect(gameObject, newValue);
+        }
+    }
+
+    private void SetCurrentHover(bool bNewValue)
+    {
+        if (null != _currentlyHovered)
+        {
+            _currentlyHovered.OnHover(gameObject, bNewValue);
+            if (!bNewValue)
+            {
+                SetCurrentSelect(false);
             }
         }
     }

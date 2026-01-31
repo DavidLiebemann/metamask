@@ -1,67 +1,68 @@
 using System;
+using GamePlay;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 
-public class CameraMirror : MonoBehaviour
+public class CameraMirror : MonoBehaviour, IInteractable
 {
-    [SerializeField] private LayerMask selectionLayer;
-    
+    [Header("References")] [SerializeField]
+    private Outline outline;
+
+
     [SerializeField] private Camera handledCamera;
-    [SerializeField] private InputActionReference selectPressed;
-    [SerializeField] private InputActionReference selectionPosition;
-    
+
 
     public Camera HandledCamera => handledCamera;
-    
+
+
     private void Awake()
     {
         Assert.IsNotNull(handledCamera);
-        Assert.IsNotNull(selectionPosition);
-        Assert.IsNotNull(selectPressed);
+
         handledCamera.gameObject.SetActive(false);
     }
 
     private void OnEnable()
     {
-        selectPressed.action.Enable();
-        selectionPosition.action.Enable();
+        OnSelect(gameObject, false);
     }
 
+    private void OnDisable()
+    {
+        OnSelect(gameObject, false);
+    }
 
-    public void SetMirrorUsed(bool bShouldBeUsed)
+    private void SetMirrorUsed(bool bShouldBeUsed)
     {
         handledCamera.gameObject.SetActive(bShouldBeUsed);
     }
 
-    private void Update()
+
+    public void OnSelect(GameObject originator, bool bIsSelected)
     {
-        if (selectPressed.action.IsPressed())
+        if (bIsSelected)
         {
-            Ray selectionRay = HandledCamera.ScreenPointToRay(selectionPosition.action.ReadValue<Vector2>());
-            if (Physics.Raycast(selectionRay, out var hit,  1000.0f, selectionLayer))
+            CameraMirror[] allCameraMirrors =
+                FindObjectsByType<CameraMirror>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            foreach (CameraMirror mirror in allCameraMirrors)
             {
-                Debug.Log($"Selected: {hit.collider.transform.parent.gameObject.name}");
+                if (mirror != this)
+                {
+                    mirror.SetMirrorUsed(false);
+                }
             }
+            SetMirrorUsed(true);
         }
-       
+
     }
 
-    private void OnMouseEnter()
-    {
-        Outline outline = GetComponent<Outline>();
-        if (outline)
-        {
-            outline.enabled = true;
-        }
-    }
 
-    private void OnMouseExit()
+    public void OnHover(GameObject originator, bool bIsHovered)
     {
-        Outline outline = GetComponent<Outline>();
         if (outline)
         {
-            outline.enabled = false;
+            outline.enabled = bIsHovered;
         }
     }
 }
