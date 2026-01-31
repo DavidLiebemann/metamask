@@ -19,4 +19,22 @@ public class CameraMirror : MonoBehaviour
     {
         handledCamera.gameObject.SetActive(bShouldBeUsed);
     }
+
+    private void OnMouseEnter()
+    {
+        Outline outline = GetComponent<Outline>();
+        if (outline)
+        {
+            outline.enabled = true;
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        Outline outline = GetComponent<Outline>();
+        if (outline)
+        {
+            outline.enabled = false;
+        }
+    }
 }

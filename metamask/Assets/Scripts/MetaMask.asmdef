@@ -2,7 +2,8 @@
     "name": "MetaMask",
     "rootNamespace": "",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c"
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:b97639ab958099c4792784b5ca2744a1"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
