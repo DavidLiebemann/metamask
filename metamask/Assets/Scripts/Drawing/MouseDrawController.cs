@@ -50,6 +50,7 @@ public class MouseDrawController : MonoBehaviour
             }
         }
     }
+    
 
     RenderTexture DrawOnTextureGPU(Texture src, Vector2 nrmPos)
     {

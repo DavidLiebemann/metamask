@@ -46,6 +46,8 @@ public class DrawZone : MonoBehaviour
 
         RenderTexture rt = new RenderTexture(textureDetail.x, textureDetail.y, 0);
         rt.filterMode = FilterMode.Point;
+        rt.autoGenerateMips = false;
+        
         RenderTexture.active = rt;
         Graphics.Blit(initialTexture, rt);
 

@@ -48,6 +48,8 @@
             float4 _BrushColor;
             float _BrushSize;
             float4 _BrushPosition;
+            
+            uniform fixed4 _MainTex_TexelSize;
 
             half when_gt(half x, half y) {
                 return max(sign(x - y), 0.0);
@@ -62,9 +64,14 @@
                 half2 brushHalf = half2(_BrushSize, _BrushSize) * 0.5;
                 half2 brushMin = _BrushPosition - brushHalf;
                 half2 brushMax = _BrushPosition + brushHalf;
-                float canDraw = when_gt(i.uv.x, brushMin.x) * when_lt(i.uv.x, brushMax.x) * when_gt(i.uv.y, brushMin.y) * when_lt(i.uv.y, brushMax.y);
-                float2 brushUVs = (i.uv - brushMin) / (brushMax - brushMin);
-                fixed4 albedo = tex2D(_MainTex, i.uv);
+                
+                float2 texSize = _MainTex_TexelSize.zw;
+                float2 clippedUv = floor(i.uv * texSize)  / texSize;
+                clippedUv += (0.5/texSize);
+                // clippedUv = i.uv;
+                float canDraw = when_gt(clippedUv.x, brushMin.x) * when_lt(clippedUv.x, brushMax.x) * when_gt(clippedUv.y, brushMin.y) * when_lt(clippedUv.y, brushMax.y);
+                float2 brushUVs = (clippedUv - brushMin) / (brushMax - brushMin);
+                fixed4 albedo = tex2D(_MainTex, clippedUv);
                 fixed4 color = lerp(albedo, _BrushColor, saturate((canDraw + tex2D(_BrushTexture, brushUVs).r) - 1));
 
                 return color;
