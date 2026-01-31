@@ -7,30 +7,20 @@ public class SwitchToGamePlayBehaviour : MonoBehaviour
 {
 
    [SerializeField] private DrawZone drawZone;
-
-   [SerializeField] private Camera drawingCamera;
-   
-   [SerializeField] private Camera gameplayCamera;
-   
    [SerializeField] private MeshRenderer targetDisplay;
-   
    
    private Texture2D _GameplayMaskTexture;
    
    private void Awake()
    {
       Assert.IsNotNull(drawZone);
-      Assert.IsNotNull(drawingCamera);
-      Assert.IsNotNull(gameplayCamera);
-      
-      UpdateCamera(true);
    }
 
-   void UpdateCamera(bool bIsDrawing)
+   private void OnEnable()
    {
-      drawingCamera.gameObject.SetActive(bIsDrawing);
-      gameplayCamera.gameObject.SetActive(!bIsDrawing);
+      StartGameplay();
    }
+
 
    public void StartGameplay()
    {
@@ -39,9 +29,7 @@ public class SwitchToGamePlayBehaviour : MonoBehaviour
          var drawZoneDrawTexture = drawZone.DrawTexture;
          _GameplayMaskTexture = new Texture2D(drawZoneDrawTexture.width, drawZoneDrawTexture.height, drawZoneDrawTexture.graphicsFormat, drawZoneDrawTexture.mipmapCount, TextureCreationFlags.None);
          Graphics.CopyTexture(drawZoneDrawTexture, _GameplayMaskTexture);
-
-
-         UpdateCamera(false);
+         
 
          targetDisplay.material.mainTexture = _GameplayMaskTexture;
       }
