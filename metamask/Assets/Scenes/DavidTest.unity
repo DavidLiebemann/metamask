@@ -1283,6 +1283,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e464d248b3ba1084ea293e18aa9bd7a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MetaMask::CameraMirrorSelectionLogic
+  selectionLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  selectPressed: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  selectionPosition: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

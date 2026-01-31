@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 4269386548726884314}
   - component: {fileID: 8810298184655608363}
   - component: {fileID: 125159121115735265}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TestMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef280a267e7fb8418cf4a2b936f2c10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MetaMask::CameraMirror
+  outline: {fileID: 125159121115735265}
   handledCamera: {fileID: 3605242011636253053}
+  selectionLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  selectPressed: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  selectionPosition: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
 --- !u!114 &125159121115735265
 MonoBehaviour:
   m_ObjectHideFlags: 0
