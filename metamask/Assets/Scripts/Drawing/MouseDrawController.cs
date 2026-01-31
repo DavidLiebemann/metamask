@@ -45,7 +45,7 @@ public class MouseDrawController : MonoBehaviour
                         z = Mathf.InverseLerp(leftBot.z, rightTop.z, p1.z),
                     };
 
-                    drawZone.DrawTexture = DrawOnTextureGPU(drawZone.DrawTexture, pointOnTextureNormalized);
+                    drawZone.DrawTexture = DrawOnTextureGPU(drawZone.DrawTexture, hit.textureCoord2);
                 }
             }
         }
