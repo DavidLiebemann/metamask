@@ -1,9 +1,11 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace GamePlay
@@ -14,8 +16,11 @@ namespace GamePlay
 
         [SerializeField] private DrawZone drawZone;
         [SerializeField] private string danceRoomSceneName;
-        [SerializeField] private UnityEvent<GameplayStateBehaviour> onSelectionFinished;
+        [FormerlySerializedAs("onSelectionFinished")] [SerializeField] private UnityEvent<GameplayStateBehaviour> onGameFinished;
         [SerializeField] private MaskChooseLogic maskChooseLogic;
+
+        [SerializeField] private float availableTime = 60.0f;
+        
         
 
         private Texture2D _gameplayMaskTexture;
@@ -35,9 +40,16 @@ namespace GamePlay
 
         private void OnFinishedSelectionFeedback(PlayerMaskBehaviour caller)
         {
+            Debug.Log("OnFinishedSelectionFeedback");
             IsSelectionFinished = true;
-            WasSelectionCorrect = caller.IsImposter;
-            if (caller.IsImposter)
+
+            OnFinishGame(caller.IsImposter);
+        }
+
+        private void OnFinishGame(bool SelectedImposterCorrectly)
+        {
+            WasSelectionCorrect = SelectedImposterCorrectly;
+            if (SelectedImposterCorrectly)
             {
                 Debug.Log("YOU WON THATS CRAZY");
             }
@@ -45,7 +57,7 @@ namespace GamePlay
             {
                 Debug.Log("NOPE");
             }
-            onSelectionFinished.Invoke(this);
+            onGameFinished.Invoke(this);
         }
 
         private void OnEnable()
@@ -58,6 +70,14 @@ namespace GamePlay
             
             var parameters = new LoadSceneParameters(LoadSceneMode.Additive);
             _loadedScene = SceneManager.LoadScene(danceRoomSceneName, parameters);
+
+            StartCoroutine(GameplayTimer());
+        }
+
+        private IEnumerator GameplayTimer()
+        {
+            yield return new WaitForSeconds(availableTime);
+            OnFinishGame(false);
         }
 
         private void SceneManagerOnsceneLoaded(Scene _loadedScene, LoadSceneMode arg1)

@@ -2,17 +2,21 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
+using Visuals;
 
 public class MouseDrawController : MonoBehaviour
 {
     public int brushSize = 10;
-    public Color brushColor = Color.black;
     public Texture2D brushTexture;
     [Range(0, 1)] public float brushHardness = 1f;
 
     [SerializeField] private InputActionReference drawAction;
     [SerializeField] private InputActionReference drawPosition;
     [SerializeField] private LayerMask drawLayer;
+
+    [SerializeField] private ColorSelectionData colorData;
+
+    
 
 
     Camera cam;
@@ -58,8 +62,12 @@ public class MouseDrawController : MonoBehaviour
 
     private RenderTexture drawTarget;
 
-    RenderTexture DrawOnTextureGPU(RenderTexture src, Vector2 nrmPos)
+    void DrawOnTextureGPU(RenderTexture src, Vector2 nrmPos)
     {
+        if (src == null)
+        {
+            return;
+        }
         int srcWidth = src.width;
 
         if (!drawTarget)
@@ -70,12 +78,11 @@ public class MouseDrawController : MonoBehaviour
         // TODO: Optimize this
         gpuDrawerMaterial.SetVector("_BrushPosition", nrmPos);
         gpuDrawerMaterial.SetFloat("_BrushSize", brushSize / (float)srcWidth);
-        gpuDrawerMaterial.SetColor("_BrushColor", brushColor);
+        gpuDrawerMaterial.SetColor("_BrushColor", colorData.CurrentColor);
 
         Graphics.Blit(src, drawTarget, gpuDrawerMaterial);
         Graphics.Blit(drawTarget, src);
         // Destroy(src);
 
-        return drawTarget;
     }
 }

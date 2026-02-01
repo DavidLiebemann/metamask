@@ -9,6 +9,8 @@ public class CameraMirror : MonoBehaviour, IInteractable
     [Header("References")] [SerializeField]
     private Outline outline;
 
+    [SerializeField] private GameObject watch;
+    
 
     [SerializeField] private Camera handledCamera;
 
@@ -36,12 +38,19 @@ public class CameraMirror : MonoBehaviour, IInteractable
     private void SetMirrorUsed(bool bShouldBeUsed)
     {
         handledCamera.gameObject.SetActive(bShouldBeUsed);
+
+        Renderer[] renderers = watch.GetComponentsInChildren<Renderer>();
+        foreach (Renderer rend in renderers)
+        {
+            rend.enabled = bShouldBeUsed;
+        }
     }
 
 
+    private bool _previousSelected = false;
     public void OnSelect(GameObject originator, bool bIsSelected)
     {
-        if (bIsSelected)
+        if (bIsSelected && _previousSelected != true)
         {
             CameraMirror[] allCameraMirrors =
                 FindObjectsByType<CameraMirror>(FindObjectsInactive.Include, FindObjectsSortMode.None);
@@ -54,6 +63,7 @@ public class CameraMirror : MonoBehaviour, IInteractable
             }
             SetMirrorUsed(true);
         }
+        _previousSelected = bIsSelected;
 
     }
 
