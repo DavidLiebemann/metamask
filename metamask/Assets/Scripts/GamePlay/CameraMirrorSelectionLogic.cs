@@ -49,6 +49,7 @@ public class CameraMirrorSelectionLogic : MonoBehaviour
         }
     }
 
+    private float _lastSelection = 0.0f;
 
     private void Update()
     {
@@ -73,7 +74,11 @@ public class CameraMirrorSelectionLogic : MonoBehaviour
                         SetCurrentHover(true);
                         if (selectPressed.action.IsPressed())
                         {
-                            SetCurrentSelect(true);
+                            if (Time.time - _lastSelection > 1.0f)
+                            {
+                                SetCurrentSelect(true);
+                                _lastSelection = Time.time;
+                            }
                         }
                         else
                         {
@@ -88,7 +93,6 @@ public class CameraMirrorSelectionLogic : MonoBehaviour
                 }
             }
         }
-        
     }
 
     private void SetCurrentSelect(bool newValue)

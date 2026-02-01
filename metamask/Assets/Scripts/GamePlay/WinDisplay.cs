@@ -2,6 +2,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace GamePlay
 {
@@ -17,6 +18,11 @@ namespace GamePlay
 
         [SerializeField] private TMP_Text messageDisplay;
         [SerializeField] private TMP_Text buttonText;
+
+        [SerializeField] private Sprite winScreen;
+        [SerializeField] private Sprite looseScreen;
+        [SerializeField] private Image background;
+        
         
 
         [FormerlySerializedAs("_gameplayStateBehaviour")] [SerializeField] private GameplayStateBehaviour gameplayStateBehaviour;
@@ -34,6 +40,8 @@ namespace GamePlay
             {
                 messageDisplay.text = timesUpMessage;
             }
+
+            background.sprite = gameplayStateBehaviour.WasSelectionCorrect ? winScreen : looseScreen;
         }
     }
 }
