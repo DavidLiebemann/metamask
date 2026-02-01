@@ -106,7 +106,10 @@ namespace GamePlay
             {
                 if (_bIsImposter)
                 {
-                    MaskTexture = maskData.ImposterMask;
+                    RenderTexture rt = new RenderTexture(maskData.MaskTexture.width, maskData.MaskTexture.height, 0);
+
+                    Graphics.Blit(maskData.MaskTexture, rt);
+                    MaskTexture = rt;
                 }
                 else
                 {
