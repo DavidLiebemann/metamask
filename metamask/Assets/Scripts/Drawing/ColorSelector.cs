@@ -2,6 +2,7 @@
 using GamePlay;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Visuals;
 
 namespace Drawing
 {
@@ -9,7 +10,8 @@ namespace Drawing
     public class ColorSelector : MonoBehaviour, IInteractable
     {
         [SerializeField] private Color color;
-
+        [SerializeField] private ColorSelectionData selectionData;
+        
         public Color DrawColor => color;
 
         private Outline _outline;
@@ -17,6 +19,7 @@ namespace Drawing
         {
             _outline = GetComponent<Outline>();
             Assert.IsNotNull(_outline);
+            Assert.IsNotNull(selectionData);
         }
 
         private void OnEnable()
@@ -31,6 +34,8 @@ namespace Drawing
             {
                 _outline.OutlineColor = Color.lawnGreen;
                 _outline.OutlineWidth = 10.0f;
+                selectionData.CurrentColor = color;
+
             }
             else
             {

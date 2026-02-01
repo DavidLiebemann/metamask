@@ -1682,7 +1682,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: MetaMask::MouseDrawController
   brushSize: 128
-  brushColor: {r: 0.6603774, g: 0.20974244, b: 0.20974244, a: 1}
   brushTexture: {fileID: 2800000, guid: d231e18e55f422349931d83925fdece0, type: 3}
   brushHardness: 1
   drawAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
@@ -1690,6 +1689,7 @@ MonoBehaviour:
   drawLayer:
     serializedVersion: 2
     m_Bits: 128
+  colorData: {fileID: 11400000, guid: 31d765248c0cd6f458655e911b5341d9, type: 2}
 --- !u!114 &609071901
 MonoBehaviour:
   m_ObjectHideFlags: 0
