@@ -3,13 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(MeshRenderer))]
-[RequireComponent(typeof(BoxCollider))]
 public class DrawZone : MonoBehaviour
 {
-    [SerializeField] private Vector2Int textureDetail = new Vector2Int(32,32);
-    
-    public MeshRenderer MeshRenderer { get; private set; }
+    [SerializeField] private Vector2Int textureDetail = new Vector2Int(32, 32);
+
+    [SerializeField] private MeshRenderer targetRenderer;
+
+    public MeshRenderer MeshRenderer
+    {
+        get => targetRenderer;
+        private set { targetRenderer = value; }
+    }
 
     public virtual Texture DrawTexture
     {
@@ -21,7 +25,8 @@ public class DrawZone : MonoBehaviour
 
     protected virtual void Awake()
     {
-        MeshRenderer = GetComponent<MeshRenderer>();
+        if (!MeshRenderer)
+            MeshRenderer = GetComponent<MeshRenderer>();
         initialTexture = DrawTexture;
     }
 
@@ -33,7 +38,7 @@ public class DrawZone : MonoBehaviour
 
     public void CreateTexture()
     {
-        if(!initialTexture)
+        if (!initialTexture)
         {
             initialTexture = new Texture2D(textureDetail.x, textureDetail.y);
             var tex2D = (Texture2D)initialTexture;
@@ -47,12 +52,13 @@ public class DrawZone : MonoBehaviour
             tex2D.SetPixels(fillColorArray);
             tex2D.Apply();
         }
+
         initialTexture.filterMode = FilterMode.Point;
 
         RenderTexture rt = new RenderTexture(textureDetail.x, textureDetail.y, 0);
         rt.filterMode = FilterMode.Point;
         rt.autoGenerateMips = false;
-        
+
         RenderTexture.active = rt;
         Graphics.Blit(initialTexture, rt);
 
