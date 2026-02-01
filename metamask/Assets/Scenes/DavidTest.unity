@@ -982,7 +982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: MetaMask::SwitchToGamePlayBehaviour
   maskModel: {fileID: 11400000, guid: d064a024fac77724ebd94093bb10d7e7, type: 2}
-  drawZone: {fileID: 0}
+  drawZone: {fileID: 1512125400}
   danceRoomSceneName: DanceRoom
 --- !u!4 &1069140225
 Transform:
@@ -999,6 +999,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 272887835}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1512125400 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4266408688969622164, guid: c36079034db9eb7458c4f264edb18943, type: 3}
+  m_PrefabInstance: {fileID: 5201742259504286403}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c272849b8a9a844f92374f22a3ef8cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: MetaMask::DrawZone
 --- !u!1 &1624316402
 GameObject:
   m_ObjectHideFlags: 0

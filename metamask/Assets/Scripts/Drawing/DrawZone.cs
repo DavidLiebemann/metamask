@@ -23,6 +23,8 @@ public class DrawZone : MonoBehaviour
         get => TargetProjector.material.GetTexture(BaseMapId);
         set => TargetProjector.material.SetTexture(BaseMapId, value);
     }
+    
+    public Texture FinalSavedTexture { get; private set; }
 
     Texture initialTexture;
 
@@ -54,16 +56,18 @@ public class DrawZone : MonoBehaviour
             tex2D.SetPixels(fillColorArray);
             tex2D.Apply();
         }
-
-        initialTexture.filterMode = FilterMode.Point;
-
+        
         RenderTexture rt = new RenderTexture(textureDetail.x, textureDetail.y, 0);
-        rt.filterMode = FilterMode.Point;
         rt.autoGenerateMips = false;
 
         RenderTexture.active = rt;
         Graphics.Blit(initialTexture, rt);
 
         DrawTexture = rt;
+    }
+
+    private void OnDisable()
+    {
+        FinalSavedTexture = DrawTexture;
     }
 }

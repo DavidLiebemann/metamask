@@ -2,13 +2,16 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
 
 namespace GamePlay
 {
     public class PlayerMaskBehaviour : MonoBehaviour, IInteractable
     {
-        [SerializeField] private MeshRenderer maskSurface;
+        private static readonly int BaseMapId = Shader.PropertyToID("Base_Map");
+
+        [SerializeField] private DecalProjector targetProjector;
 
         [SerializeField] private MaskModel maskData;
 
@@ -22,10 +25,16 @@ namespace GamePlay
 
         public bool IsImposter => _bIsImposter;
         private bool _bIsImposter = false;
+        
+        public virtual Texture MaskTexture
+        {
+            get => targetProjector.material.GetTexture(BaseMapId);
+            set => targetProjector.material.SetTexture(BaseMapId, value);
+        }
 
         private void Awake()
         {
-            Assert.IsNotNull(maskSurface);
+            Assert.IsNotNull(targetProjector);
             Assert.IsNotNull(outline);
             Assert.IsNotNull(maskData);
 
@@ -59,9 +68,9 @@ namespace GamePlay
 
         private void OnMaskChanged()
         {
-            if (maskData && maskSurface)
+            if (maskData && targetProjector)
             {
-                maskSurface.material.mainTexture = _bIsImposter ? maskData.ImposterMask : maskData.MaskTexture;
+               MaskTexture = _bIsImposter ? maskData.ImposterMask : maskData.MaskTexture;
             }
         }
         
