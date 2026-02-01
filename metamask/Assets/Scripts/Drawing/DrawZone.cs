@@ -48,7 +48,7 @@ public class DrawZone : MonoBehaviour
 
             for (var i = 0; i < fillColorArray.Length; ++i)
             {
-                fillColorArray[i] = Color.white;
+                fillColorArray[i] = new Color(0, 0, 0, 0);
             }
 
             tex2D.SetPixels(fillColorArray);
