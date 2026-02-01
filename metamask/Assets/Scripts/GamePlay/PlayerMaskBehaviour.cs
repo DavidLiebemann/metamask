@@ -25,11 +25,14 @@ namespace GamePlay
 
         public bool IsImposter => _bIsImposter;
         private bool _bIsImposter = false;
-        
+
         public virtual Texture MaskTexture
         {
             get => targetProjector.material.GetTexture(BaseMapId);
-            set => targetProjector.material.SetTexture(BaseMapId, value);
+            set
+            {
+                targetProjector.material.SetTexture(BaseMapId, value);
+            }
         }
 
         private void Awake()
@@ -70,11 +73,10 @@ namespace GamePlay
         {
             if (maskData && targetProjector)
             {
-               MaskTexture = _bIsImposter ? maskData.ImposterMask : maskData.MaskTexture;
+                MaskTexture = _bIsImposter ? maskData.ImposterMask : maskData.MaskTexture;
             }
         }
-        
-        
+
 
         public void SetupMask(bool bIsImposter)
         {

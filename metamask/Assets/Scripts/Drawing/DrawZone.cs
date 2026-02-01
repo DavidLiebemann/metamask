@@ -24,6 +24,8 @@ public class DrawZone : MonoBehaviour
         set => TargetProjector.material.SetTexture(BaseMapId, value);
     }
     
+    
+    
     public Texture FinalSavedTexture { get; private set; }
 
     Texture initialTexture;
@@ -33,8 +35,14 @@ public class DrawZone : MonoBehaviour
         Assert.IsNotNull(TargetProjector);
         initialTexture = DrawTexture;
     }
+    
 
-    private IEnumerator Start()
+    private void OnEnable()
+    {
+        StartCoroutine(ShortDelayBeforeTexture());
+    }
+
+    private IEnumerator ShortDelayBeforeTexture()
     {
         yield return new WaitForSeconds(0.1f);
         CreateTexture();
@@ -42,20 +50,18 @@ public class DrawZone : MonoBehaviour
 
     public void CreateTexture()
     {
-        if (!initialTexture)
+        
+        initialTexture = new Texture2D(textureDetail.x, textureDetail.y);
+        var tex2D = (Texture2D)initialTexture;
+        var fillColorArray = tex2D.GetPixels();
+
+        for (var i = 0; i < fillColorArray.Length; ++i)
         {
-            initialTexture = new Texture2D(textureDetail.x, textureDetail.y);
-            var tex2D = (Texture2D)initialTexture;
-            var fillColorArray = tex2D.GetPixels();
-
-            for (var i = 0; i < fillColorArray.Length; ++i)
-            {
-                fillColorArray[i] = new Color(0, 0, 0, 0);
-            }
-
-            tex2D.SetPixels(fillColorArray);
-            tex2D.Apply();
+            fillColorArray[i] = new Color(0, 0, 0, 0);
         }
+
+        tex2D.SetPixels(fillColorArray);
+        tex2D.Apply();
         
         RenderTexture rt = new RenderTexture(textureDetail.x, textureDetail.y, 0);
         rt.autoGenerateMips = false;

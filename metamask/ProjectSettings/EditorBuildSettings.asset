@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/DavidTest.unity
+    path: Assets/Scenes/GameplayLevel.unity
     guid: fe116e346214f4029b29f44bcb7f8b75
   - enabled: 1
     path: Assets/Scenes/DanceRoom.unity

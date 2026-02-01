@@ -14,8 +14,6 @@ public class MouseDrawController : MonoBehaviour
     [SerializeField] private InputActionReference drawPosition;
     [SerializeField] private LayerMask drawLayer;
 
-    
-    
 
     Camera cam;
     Material gpuDrawerMaterial;
@@ -32,7 +30,10 @@ public class MouseDrawController : MonoBehaviour
     {
         drawAction.action.Enable();
         drawPosition.action.Enable();
+        bIsFirstDraw = true;
     }
+
+    private bool bIsFirstDraw = true;
 
     void Start()
     {
@@ -49,25 +50,32 @@ public class MouseDrawController : MonoBehaviour
             {
                 if (drawAction.action.IsPressed())
                 {
-                    drawZone.DrawTexture = DrawOnTextureGPU(drawZone.DrawTexture, hit.textureCoord);
+                    DrawOnTextureGPU(drawZone.DrawTexture as RenderTexture, hit.textureCoord);
                 }
             }
         }
     }
 
+    private RenderTexture drawTarget;
 
-    RenderTexture DrawOnTextureGPU(Texture src, Vector2 nrmPos)
+    RenderTexture DrawOnTextureGPU(RenderTexture src, Vector2 nrmPos)
     {
         int srcWidth = src.width;
+
+        if (!drawTarget)
+        {
+            drawTarget = new RenderTexture(srcWidth, src.height, 32);
+        }
+
         // TODO: Optimize this
         gpuDrawerMaterial.SetVector("_BrushPosition", nrmPos);
         gpuDrawerMaterial.SetFloat("_BrushSize", brushSize / (float)srcWidth);
         gpuDrawerMaterial.SetColor("_BrushColor", brushColor);
 
-        RenderTexture copiedTexture = new RenderTexture(srcWidth, src.height, 32);
-        Graphics.Blit(src, copiedTexture, gpuDrawerMaterial);
-        DestroyImmediate(src);
+        Graphics.Blit(src, drawTarget, gpuDrawerMaterial);
+        Graphics.Blit(drawTarget, src);
+        // Destroy(src);
 
-        return copiedTexture;
+        return drawTarget;
     }
 }

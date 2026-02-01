@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -13,31 +14,43 @@ namespace GamePlay
 
         [SerializeField] private DrawZone drawZone;
         [SerializeField] private string danceRoomSceneName;
-
+        [SerializeField] private UnityEvent<GameplayStateBehaviour> onSelectionFinished;
+        
 
         private Texture2D _gameplayMaskTexture;
         private Scene _loadedScene;
+        
+        public bool IsSelectionFinished { get; private set; }
+        public bool WasSelectionCorrect { get; private set; }
 
         private void Awake()
         {
             Assert.IsNotNull(drawZone);
             Assert.IsNotNull(maskModel);
         }
+        
+        
 
         private void OnFinishedSelectionFeedback(PlayerMaskBehaviour caller)
         {
+            IsSelectionFinished = true;
+            WasSelectionCorrect = caller.IsImposter;
             if (caller.IsImposter)
             {
                 Debug.Log("YOU WON THATS CRAZY");
             }
             else
             {
-                Debug.Log("DUDE YOU DUMB");
+                Debug.Log("NOPE");
             }
+            onSelectionFinished.Invoke(this);
         }
 
         private void OnEnable()
         {
+            IsSelectionFinished = false;
+            WasSelectionCorrect = false;
+            
             SceneManager.sceneLoaded += SceneManagerOnsceneLoaded;
             PlayerMaskBehaviour.onFinishedSelectionFeedback += OnFinishedSelectionFeedback;
             
@@ -79,13 +92,6 @@ namespace GamePlay
                 maskModel.MaskTexture = CreateCopy(drawZone.FinalSavedTexture);
                 Texture2D imposterMask = CreateCopy(drawZone.FinalSavedTexture);
 
-                Color[] colors = new Color[16];
-                for (var i = 0; i < colors.Length; i++)
-                {
-                    colors[i] = Color.darkRed;
-                }
-                imposterMask.SetPixel(5,5,Color.darkRed);
-                imposterMask.Apply();
 
                 maskModel.ImposterMask = imposterMask;
             }
