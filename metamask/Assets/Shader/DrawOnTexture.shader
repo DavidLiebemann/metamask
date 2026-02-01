@@ -65,10 +65,10 @@
                 half2 brushMin = _BrushPosition - brushHalf;
                 half2 brushMax = _BrushPosition + brushHalf;
                 
-                float2 texSize = _MainTex_TexelSize.zw;
-                float2 clippedUv = floor(i.uv * texSize)  / texSize;
-                clippedUv += (0.5/texSize);
-                // clippedUv = i.uv;
+                // float2 texSize = _MainTex_TexelSize.zw;
+                // float2 clippedUv = floor(i.uv * texSize)  / texSize;
+                // clippedUv += (0.5/texSize);
+                float2 clippedUv = i.uv;
                 float canDraw = when_gt(clippedUv.x, brushMin.x) * when_lt(clippedUv.x, brushMax.x) * when_gt(clippedUv.y, brushMin.y) * when_lt(clippedUv.y, brushMax.y);
                 float2 brushUVs = (clippedUv - brushMin) / (brushMax - brushMin);
                 fixed4 albedo = tex2D(_MainTex, clippedUv);

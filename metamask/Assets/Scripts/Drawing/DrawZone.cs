@@ -2,31 +2,33 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
+using UnityEngine.Rendering.Universal;
 
 public class DrawZone : MonoBehaviour
 {
+    private static readonly int BaseMapId = Shader.PropertyToID("Base_Map");
     [SerializeField] private Vector2Int textureDetail = new Vector2Int(32, 32);
 
-    [SerializeField] private MeshRenderer targetRenderer;
+    [SerializeField] private DecalProjector targetProjector;
 
-    public MeshRenderer MeshRenderer
+    public DecalProjector TargetProjector
     {
-        get => targetRenderer;
-        private set { targetRenderer = value; }
+        get => targetProjector;
+        private set { targetProjector = value; }
     }
 
     public virtual Texture DrawTexture
     {
-        get => MeshRenderer.material.mainTexture;
-        set => MeshRenderer.material.mainTexture = value;
+        get => TargetProjector.material.GetTexture(BaseMapId);
+        set => TargetProjector.material.SetTexture(BaseMapId, value);
     }
 
     Texture initialTexture;
 
     protected virtual void Awake()
     {
-        if (!MeshRenderer)
-            MeshRenderer = GetComponent<MeshRenderer>();
+        Assert.IsNotNull(TargetProjector);
         initialTexture = DrawTexture;
     }
 

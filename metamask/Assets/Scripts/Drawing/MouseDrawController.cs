@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 
 public class MouseDrawController : MonoBehaviour
@@ -6,8 +8,14 @@ public class MouseDrawController : MonoBehaviour
     public int brushSize = 10;
     public Color brushColor = Color.black;
     public Texture2D brushTexture;
-    [Range(0, 1)]
-    public float brushHardness = 1f;
+    [Range(0, 1)] public float brushHardness = 1f;
+
+    [SerializeField] private InputActionReference drawAction;
+    [SerializeField] private InputActionReference drawPosition;
+    [SerializeField] private LayerMask drawLayer;
+
+    
+    
 
     Camera cam;
     Material gpuDrawerMaterial;
@@ -16,41 +24,37 @@ public class MouseDrawController : MonoBehaviour
     {
         gpuDrawerMaterial = new Material(Shader.Find("Hidden/DrawOnTexture"));
         gpuDrawerMaterial.SetTexture("_BrushTexture", brushTexture);
+        Assert.IsNotNull(drawAction);
+        Assert.IsNotNull(drawPosition);
+    }
+
+    private void OnEnable()
+    {
+        drawAction.action.Enable();
+        drawPosition.action.Enable();
     }
 
     void Start()
     {
-        cam = GetComponent<Camera>();        
+        cam = GetComponent<Camera>();
     }
 
     void Update()
     {
-        Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());        
+        Ray ray = cam.ScreenPointToRay(drawPosition.action.ReadValue<Vector2>());
 
-        if (Physics.Raycast(ray, out var hit))
+        if (Physics.Raycast(ray, out var hit, 100.0f, drawLayer))
         {
             if (hit.collider.TryGetComponent<DrawZone>(out var drawZone))
             {
-                var leftBot = drawZone.MeshRenderer.bounds.center - drawZone.MeshRenderer.bounds.extents;
-                var rightTop = drawZone.MeshRenderer.bounds.center + drawZone.MeshRenderer.bounds.extents;
-
-                var p1 = hit.point;
-
-                if (Mouse.current.leftButton.isPressed)
+                if (drawAction.action.IsPressed())
                 {
-                    var pointOnTextureNormalized = new Vector3
-                    {
-                        x = Mathf.InverseLerp(leftBot.x, rightTop.x, p1.x),
-                        y = Mathf.InverseLerp(leftBot.y, rightTop.y, p1.y),
-                        z = Mathf.InverseLerp(leftBot.z, rightTop.z, p1.z),
-                    };
-
-                    drawZone.DrawTexture = DrawOnTextureGPU(drawZone.DrawTexture, hit.textureCoord2);
+                    drawZone.DrawTexture = DrawOnTextureGPU(drawZone.DrawTexture, hit.textureCoord);
                 }
             }
         }
     }
-    
+
 
     RenderTexture DrawOnTextureGPU(Texture src, Vector2 nrmPos)
     {
@@ -65,5 +69,5 @@ public class MouseDrawController : MonoBehaviour
         DestroyImmediate(src);
 
         return copiedTexture;
-    }    
+    }
 }
