@@ -15,6 +15,7 @@ namespace GamePlay
         [SerializeField] private DrawZone drawZone;
         [SerializeField] private string danceRoomSceneName;
         [SerializeField] private UnityEvent<GameplayStateBehaviour> onSelectionFinished;
+        [SerializeField] private MaskChooseLogic maskChooseLogic;
         
 
         private Texture2D _gameplayMaskTexture;
@@ -27,6 +28,7 @@ namespace GamePlay
         {
             Assert.IsNotNull(drawZone);
             Assert.IsNotNull(maskModel);
+            Assert.IsNotNull(maskChooseLogic);
         }
         
         
@@ -94,6 +96,11 @@ namespace GamePlay
 
 
                 maskModel.ImposterMask = imposterMask;
+            }
+
+            if (maskChooseLogic)
+            {
+                maskModel.SelectedMask = maskChooseLogic.SelectedMaskName;
             }
         }
 
