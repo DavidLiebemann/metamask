@@ -47,9 +47,10 @@ public class CameraMirror : MonoBehaviour, IInteractable
     }
 
 
+    private bool _previousSelected = false;
     public void OnSelect(GameObject originator, bool bIsSelected)
     {
-        if (bIsSelected)
+        if (bIsSelected && _previousSelected != true)
         {
             CameraMirror[] allCameraMirrors =
                 FindObjectsByType<CameraMirror>(FindObjectsInactive.Include, FindObjectsSortMode.None);
@@ -62,6 +63,7 @@ public class CameraMirror : MonoBehaviour, IInteractable
             }
             SetMirrorUsed(true);
         }
+        _previousSelected = bIsSelected;
 
     }
 
