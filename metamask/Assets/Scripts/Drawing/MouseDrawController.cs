@@ -62,8 +62,12 @@ public class MouseDrawController : MonoBehaviour
 
     private RenderTexture drawTarget;
 
-    RenderTexture DrawOnTextureGPU(RenderTexture src, Vector2 nrmPos)
+    void DrawOnTextureGPU(RenderTexture src, Vector2 nrmPos)
     {
+        if (src == null)
+        {
+            return;
+        }
         int srcWidth = src.width;
 
         if (!drawTarget)
@@ -80,6 +84,5 @@ public class MouseDrawController : MonoBehaviour
         Graphics.Blit(drawTarget, src);
         // Destroy(src);
 
-        return drawTarget;
     }
 }

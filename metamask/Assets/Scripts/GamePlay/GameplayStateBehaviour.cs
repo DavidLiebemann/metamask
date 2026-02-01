@@ -40,6 +40,7 @@ namespace GamePlay
 
         private void OnFinishedSelectionFeedback(PlayerMaskBehaviour caller)
         {
+            Debug.Log("OnFinishedSelectionFeedback");
             IsSelectionFinished = true;
 
             OnFinishGame(caller.IsImposter);

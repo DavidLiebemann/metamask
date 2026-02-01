@@ -117,6 +117,7 @@ MonoBehaviour:
   maskData: {fileID: 11400000, guid: d064a024fac77724ebd94093bb10d7e7, type: 2}
   outline: {fileID: 3773351679014200202}
   maskRoot: {fileID: 4699825991944397546}
+  changerMaterial: {fileID: 2100000, guid: fd80796c4c5dfcc4eb26d8f341423931, type: 2}
   selectionFeedback: {fileID: 8850989889608232480}
 --- !u!135 &8839182415779225730
 SphereCollider:
@@ -341,6 +342,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4699825991944397546}
+  - {fileID: 1948616835114620599}
   m_Father: {fileID: 5356100297512691500}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8177585926978977677
@@ -375,7 +377,6 @@ Transform:
   - {fileID: 1456884693111398601}
   - {fileID: 1869330572991752707}
   - {fileID: 5687633517203551470}
-  - {fileID: 1948616835114620599}
   - {fileID: 1904883416399551722}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -385,7 +386,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5356100297512691500}
+    m_TransformParent: {fileID: 1904883416399551722}
     m_Modifications:
     - target: {fileID: 1206805392656158170, guid: c36079034db9eb7458c4f264edb18943, type: 3}
       propertyPath: m_LocalScale.x
@@ -405,7 +406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1206805392656158170, guid: c36079034db9eb7458c4f264edb18943, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.4099998
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1206805392656158170, guid: c36079034db9eb7458c4f264edb18943, type: 3}
       propertyPath: m_LocalPosition.z
@@ -776,6 +777,10 @@ PrefabInstance:
     - target: {fileID: 4611339159280556588, guid: 3bcce21340548544db8a498e29bf5deb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215879889037939313, guid: 3bcce21340548544db8a498e29bf5deb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

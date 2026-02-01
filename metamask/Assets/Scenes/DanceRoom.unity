@@ -744,53 +744,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6418365679802039771, guid: d6162e57134673d4f8f292b96c5e28ee, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1985140300}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6162e57134673d4f8f292b96c5e28ee, type: 3}
 --- !u!4 &1985140298 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 173883634933549860, guid: d6162e57134673d4f8f292b96c5e28ee, type: 3}
   m_PrefabInstance: {fileID: 1985140297}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1985140299 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6418365679802039771, guid: d6162e57134673d4f8f292b96c5e28ee, type: 3}
-  m_PrefabInstance: {fileID: 1985140297}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1985140300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985140299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBrain
-  ShowDebugText: 0
-  ShowCameraFrustum: 1
-  IgnoreTimeScale: 0
-  WorldUpOverride: {fileID: 0}
-  ChannelMask: -1
-  UpdateMethod: 2
-  BlendUpdateMethod: 1
-  LensModeOverride:
-    Enabled: 0
-    DefaultMode: 2
-  DefaultBlend:
-    Style: 1
-    Time: 2
-    CustomCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  CustomBlends: {fileID: 0}
 --- !u!1001 &6445456774716064664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -951,34 +911,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5356100297512691500, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5657558020906343813, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
-      propertyPath: managedReferences[6207046219169530110].ShadowStrengthCurve.m_Curve.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5657558020906343813, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
-      propertyPath: managedReferences[6207046219169530110].ShadowStrengthCurve.m_Curve.Array.data[1].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5657558020906343813, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
-      propertyPath: managedReferences[6207046219169530110].ShadowStrengthCurve.m_Curve.Array.data[0].inSlope
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5657558020906343813, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
-      propertyPath: managedReferences[6207046219169530110].ShadowStrengthCurve.m_Curve.Array.data[0].outSlope
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5657983014428632621, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
-      propertyPath: m_SpotAngle
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 5657983014428632621, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
-      propertyPath: m_InnerSpotAngle
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5657983014428632621, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}
-      propertyPath: m_Shadows.m_Strength
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8177585926978977677, guid: 7140b7bdab78b5e42a27994a85cf1184, type: 3}

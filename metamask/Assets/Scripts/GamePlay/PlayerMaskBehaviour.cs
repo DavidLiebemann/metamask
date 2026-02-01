@@ -1,7 +1,9 @@
 ﻿using System;
 using MoreMountains.Feedbacks;
+using UnityEditor.Graphs;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -19,7 +21,9 @@ namespace GamePlay
         [SerializeField] private Outline outline;
 
         [SerializeField] private Transform maskRoot;
-        
+
+        [SerializeField] private Material changerMaterial;
+
 
         [FormerlySerializedAs("feedback")] [SerializeField]
         private AFeedback selectionFeedback;
@@ -32,11 +36,8 @@ namespace GamePlay
 
         public virtual Texture MaskTexture
         {
-            get => targetProjector.material.GetTexture(BaseMapId);
-            set
-            {
-                targetProjector.material.SetTexture(BaseMapId, value);
-            }
+            get => targetProjector.material.mainTexture;
+            set { targetProjector.material.mainTexture = value; }
         }
 
         private void Awake()
@@ -47,6 +48,8 @@ namespace GamePlay
 
             maskData.OnMaskTextureChanged += OnMaskChanged;
             maskData.OnMaskPrefabChanged += OnMaskPrefabChanged;
+
+            targetProjector.material = new Material(Shader.Find("Shader Graphs/Decal"));
         }
 
         private void OnMaskPrefabChanged()
@@ -64,7 +67,7 @@ namespace GamePlay
 
         private void ActivateMask(string maskName)
         {
-            Transform[] children =  maskRoot.GetComponentsInChildren<Transform>(true);
+            Transform[] children = maskRoot.GetComponentsInChildren<Transform>(true);
             for (int i = 0; i < children.Length; i++)
             {
                 if (children[i].parent == maskRoot)
@@ -77,6 +80,7 @@ namespace GamePlay
 
         private void OnFeedbackFinished()
         {
+            Debug.Log("OnFeedbackFinished");
             onFinishedSelectionFeedback?.Invoke(this);
         }
 
@@ -86,7 +90,7 @@ namespace GamePlay
             {
                 outline.enabled = false;
             }
-            
+
             maskData.OnMaskTextureChanged -= OnMaskChanged;
             maskData.OnMaskPrefabChanged -= OnMaskPrefabChanged;
         }
@@ -100,8 +104,33 @@ namespace GamePlay
         {
             if (maskData && targetProjector)
             {
-                MaskTexture = _bIsImposter ? maskData.ImposterMask : maskData.MaskTexture;
+                if (_bIsImposter)
+                {
+                    MaskTexture = maskData.ImposterMask;
+                }
+                else
+                {
+                    if (maskData.MaskTexture)
+                    {
+                        Material flipMaterial = new Material(Shader.Find("Custom/FlipMaskTexture"));
+                        flipMaterial.SetTexture("_MainTex", maskData.MaskTexture);
+                        flipMaterial.SetFloat("_FlipVariant", Random.Range(0,8));
+                        RenderTexture rt = new RenderTexture(maskData.MaskTexture.width, maskData.MaskTexture.height, 0);
+
+                        Graphics.Blit(maskData.MaskTexture, rt, flipMaterial);
+                        Debug.Log("Applying Blit");
+                        MaskTexture = rt;
+                    }
+                }
             }
+        }
+
+        private Texture2D CreateCopy(Texture src)
+        {
+            Texture2D copy = new Texture2D(src.width, src.height,
+                src.graphicsFormat, src.mipmapCount, TextureCreationFlags.None);
+            Graphics.CopyTexture(src, copy);
+            return copy;
         }
 
 
