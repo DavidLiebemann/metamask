@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabf6b8aa2d64eac9899485dcdd6f7a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MetaMask::GamePlay.DancerSelectionFeedback
-  duration: 3
+  duration: 1
   curve:
     serializedVersion: 2
     m_Curve:
