@@ -1297,8 +1297,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 0.1
+  far clip plane: 100
   field of view: 60
   orthographic: 0
   orthographic size: 0.2
@@ -1898,7 +1898,7 @@ GameObject:
   - component: {fileID: 1069140225}
   - component: {fileID: 1069140224}
   m_Layer: 0
-  m_Name: Switch
+  m_Name: GameplayLogic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1934,6 +1934,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  maskChooseLogic: {fileID: 311054534}
 --- !u!4 &1069140225
 Transform:
   m_ObjectHideFlags: 0

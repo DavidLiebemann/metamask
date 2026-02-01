@@ -8,15 +8,29 @@ namespace GamePlay
     {
         private Texture2D _maskTexture;
 
+        private string _selectedMask;
+        public string SelectedMask
+        {
+            get
+            {
+                return _selectedMask;
+            }
+            set
+            {
+                _selectedMask = value;
+                OnMaskPrefabChanged?.Invoke();
+            }
+        }
+
         public Texture2D MaskTexture
         {
             get => _maskTexture;
             set
             {
                 _maskTexture = value;
-                if(null != OnMaskChanged)
+                if(null != OnMaskTextureChanged)
                 {
-                    OnMaskChanged.Invoke();
+                    OnMaskTextureChanged.Invoke();
                 }
             }
         }
@@ -28,11 +42,12 @@ namespace GamePlay
             set
             {
                 _imposterMask = value;
-                OnMaskChanged?.Invoke();
+                OnMaskTextureChanged?.Invoke();
             }
         }
 
-        public Action OnMaskChanged;
+        public Action OnMaskTextureChanged;
+        public Action OnMaskPrefabChanged;
     }
 }
 

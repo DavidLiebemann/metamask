@@ -97,6 +97,7 @@ MonoBehaviour:
   targetProjector: {fileID: 837320440357499833}
   maskData: {fileID: 11400000, guid: d064a024fac77724ebd94093bb10d7e7, type: 2}
   outline: {fileID: 5315497216028002366}
+  maskRoot: {fileID: 4699825991944397546}
   selectionFeedback: {fileID: 8850989889608232480}
 --- !u!135 &8839182415779225730
 SphereCollider:

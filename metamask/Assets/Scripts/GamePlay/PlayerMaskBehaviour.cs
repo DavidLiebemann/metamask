@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace GamePlay
 {
@@ -16,6 +17,9 @@ namespace GamePlay
         [SerializeField] private MaskModel maskData;
 
         [SerializeField] private Outline outline;
+
+        [SerializeField] private Transform maskRoot;
+        
 
         [FormerlySerializedAs("feedback")] [SerializeField]
         private AFeedback selectionFeedback;
@@ -41,14 +45,34 @@ namespace GamePlay
             Assert.IsNotNull(outline);
             Assert.IsNotNull(maskData);
 
-            maskData.OnMaskChanged += OnMaskChanged;
+            maskData.OnMaskTextureChanged += OnMaskChanged;
+            maskData.OnMaskPrefabChanged += OnMaskPrefabChanged;
+        }
+
+        private void OnMaskPrefabChanged()
+        {
+            ActivateMask(maskData.SelectedMask);
         }
 
         private void OnEnable()
         {
             OnMaskChanged();
+            ActivateMask(maskData.SelectedMask);
 
             selectionFeedback.onReachedEnd.AddListener(OnFeedbackFinished);
+        }
+
+        private void ActivateMask(string maskName)
+        {
+            Transform[] children =  maskRoot.GetComponentsInChildren<Transform>(true);
+            for (int i = 0; i < children.Length; i++)
+            {
+                if (children[i].parent == maskRoot)
+                {
+                    string gameObjectName = children[i].gameObject.name;
+                    children[i].gameObject.SetActive(gameObjectName == maskName);
+                }
+            }
         }
 
         private void OnFeedbackFinished()
@@ -62,11 +86,14 @@ namespace GamePlay
             {
                 outline.enabled = false;
             }
+            
+            maskData.OnMaskTextureChanged -= OnMaskChanged;
+            maskData.OnMaskPrefabChanged -= OnMaskPrefabChanged;
         }
 
         private void OnDestroy()
         {
-            maskData.OnMaskChanged -= OnMaskChanged;
+            maskData.OnMaskTextureChanged -= OnMaskChanged;
         }
 
         private void OnMaskChanged()

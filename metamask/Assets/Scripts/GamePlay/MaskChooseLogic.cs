@@ -6,9 +6,13 @@ namespace GamePlay
 {
     public class MaskChooseLogic : MonoBehaviour
     {
-
         private GameObject[] _masks;
         private int _activeMaskId = 0;
+
+        public string SelectedMaskName
+        {
+            get { return _masks[_activeMaskId].name; }
+        }
 
         private void OnEnable()
         {
@@ -44,6 +48,7 @@ namespace GamePlay
             {
                 _activeMaskId += _masks.Length;
             }
+
             UpdateMasksActive();
         }
     }
