@@ -1,6 +1,5 @@
 ﻿using System;
 using MoreMountains.Feedbacks;
-using UnityEditor.Graphs;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Experimental.Rendering;
@@ -106,7 +105,10 @@ namespace GamePlay
             {
                 if (_bIsImposter)
                 {
-                    MaskTexture = maskData.ImposterMask;
+                    RenderTexture rt = new RenderTexture(maskData.MaskTexture.width, maskData.MaskTexture.height, 0);
+
+                    Graphics.Blit(maskData.MaskTexture, rt);
+                    MaskTexture = rt;
                 }
                 else
                 {
