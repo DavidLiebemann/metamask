@@ -2,31 +2,35 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
+using UnityEngine.Rendering.Universal;
 
 public class DrawZone : MonoBehaviour
 {
+    private static readonly int BaseMapId = Shader.PropertyToID("Base_Map");
     [SerializeField] private Vector2Int textureDetail = new Vector2Int(32, 32);
 
-    [SerializeField] private MeshRenderer targetRenderer;
+    [SerializeField] private DecalProjector targetProjector;
 
-    public MeshRenderer MeshRenderer
+    public DecalProjector TargetProjector
     {
-        get => targetRenderer;
-        private set { targetRenderer = value; }
+        get => targetProjector;
+        private set { targetProjector = value; }
     }
 
     public virtual Texture DrawTexture
     {
-        get => MeshRenderer.material.mainTexture;
-        set => MeshRenderer.material.mainTexture = value;
+        get => TargetProjector.material.GetTexture(BaseMapId);
+        set => TargetProjector.material.SetTexture(BaseMapId, value);
     }
+    
+    public Texture FinalSavedTexture { get; private set; }
 
     Texture initialTexture;
 
     protected virtual void Awake()
     {
-        if (!MeshRenderer)
-            MeshRenderer = GetComponent<MeshRenderer>();
+        Assert.IsNotNull(TargetProjector);
         initialTexture = DrawTexture;
     }
 
@@ -46,22 +50,24 @@ public class DrawZone : MonoBehaviour
 
             for (var i = 0; i < fillColorArray.Length; ++i)
             {
-                fillColorArray[i] = Color.white;
+                fillColorArray[i] = new Color(0, 0, 0, 0);
             }
 
             tex2D.SetPixels(fillColorArray);
             tex2D.Apply();
         }
-
-        initialTexture.filterMode = FilterMode.Point;
-
+        
         RenderTexture rt = new RenderTexture(textureDetail.x, textureDetail.y, 0);
-        rt.filterMode = FilterMode.Point;
         rt.autoGenerateMips = false;
 
         RenderTexture.active = rt;
         Graphics.Blit(initialTexture, rt);
 
         DrawTexture = rt;
+    }
+
+    private void OnDisable()
+    {
+        FinalSavedTexture = DrawTexture;
     }
 }

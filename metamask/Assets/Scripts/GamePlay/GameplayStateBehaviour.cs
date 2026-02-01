@@ -76,8 +76,8 @@ namespace GamePlay
             SetupDancerMasks();
             if (drawZone)
             {
-                maskModel.MaskTexture = CreateCopy(drawZone.DrawTexture);
-                Texture2D imposterMask = CreateCopy(drawZone.DrawTexture);
+                maskModel.MaskTexture = CreateCopy(drawZone.FinalSavedTexture);
+                Texture2D imposterMask = CreateCopy(drawZone.FinalSavedTexture);
 
                 Color[] colors = new Color[16];
                 for (var i = 0; i < colors.Length; i++)
