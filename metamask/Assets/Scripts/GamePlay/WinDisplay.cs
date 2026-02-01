@@ -9,6 +9,8 @@ namespace GamePlay
     {
         [SerializeField] private string winMessage = "YOU FOUND YOUR PRINCE CHARMING!\nYou found the changed mask!";
         [SerializeField] private string looseMessage = "THE ONE THAT GOT AWAY...\nYou did not find the changed mask.";
+        [SerializeField] private string timesUpMessage = "TIMES UP...\nYou did not find the changed mask.";
+        
 
         [SerializeField] private string winButtonMessage = "FIND ANOTHER";
         [SerializeField] private string looseButtonMessage = "TRY AGAIN";
@@ -22,11 +24,15 @@ namespace GamePlay
         
         private void OnEnable()
         {
+            buttonText.text = gameplayStateBehaviour.WasSelectionCorrect ? winButtonMessage : looseButtonMessage;
+            
             if (gameplayStateBehaviour.IsSelectionFinished)
             {
-                buttonText.text = gameplayStateBehaviour.WasSelectionCorrect ? winButtonMessage : looseButtonMessage;
                 messageDisplay.text = gameplayStateBehaviour.WasSelectionCorrect ? winMessage : looseMessage;
-                
+            }
+            else
+            {
+                messageDisplay.text = timesUpMessage;
             }
         }
     }
