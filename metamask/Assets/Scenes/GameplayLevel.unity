@@ -878,6 +878,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 583055113}
     m_Modifications:
+    - target: {fileID: 1097377568900784072, guid: 3bcce21340548544db8a498e29bf5deb, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 0bf860b01131fd946a306832c8d6a3d9, type: 2}
+    - target: {fileID: 1097377568900784072, guid: 3bcce21340548544db8a498e29bf5deb, type: 3}
+      propertyPath: m_RenderingLayerMask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 2716075919793464967, guid: 3bcce21340548544db8a498e29bf5deb, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2308,6 +2316,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   colorData: {fileID: 11400000, guid: 31d765248c0cd6f458655e911b5341d9, type: 2}
+  drawOnTexture: {fileID: 4800000, guid: beb6ec9c33744e69a1ed3acf05a9caed, type: 3}
 --- !u!114 &609071901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2901,7 +2910,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 311054534}
         m_TargetAssemblyTypeName: GamePlay.MaskChooseLogic, MetaMask
         m_MethodName: NextMask
         m_Mode: 1
@@ -5297,7 +5306,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 311054534}
         m_TargetAssemblyTypeName: GamePlay.MaskChooseLogic, MetaMask
         m_MethodName: PreviousMask
         m_Mode: 1

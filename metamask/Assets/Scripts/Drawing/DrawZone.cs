@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering.Universal;
 
 public class DrawZone : MonoBehaviour
@@ -51,7 +52,7 @@ public class DrawZone : MonoBehaviour
     public void CreateTexture()
     {
         
-        initialTexture = new Texture2D(textureDetail.x, textureDetail.y);
+        initialTexture = new Texture2D(textureDetail.x, textureDetail.y, DefaultFormat.LDR, 0, TextureCreationFlags.None);
         var tex2D = (Texture2D)initialTexture;
         var fillColorArray = tex2D.GetPixels();
 
@@ -63,8 +64,9 @@ public class DrawZone : MonoBehaviour
         tex2D.SetPixels(fillColorArray);
         tex2D.Apply();
         
-        RenderTexture rt = new RenderTexture(textureDetail.x, textureDetail.y, 0);
+        RenderTexture rt = new RenderTexture(textureDetail.x, textureDetail.y,0, RenderTextureFormat.ARGB32);
         rt.autoGenerateMips = false;
+        rt.useMipMap = false;
 
         RenderTexture.active = rt;
         Graphics.Blit(initialTexture, rt);

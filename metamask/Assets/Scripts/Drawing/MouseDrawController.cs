@@ -16,6 +16,10 @@ public class MouseDrawController : MonoBehaviour
 
     [SerializeField] private ColorSelectionData colorData;
 
+    [SerializeField] private Shader drawOnTexture;
+
+    
+
     
 
 
@@ -24,7 +28,7 @@ public class MouseDrawController : MonoBehaviour
 
     private void Awake()
     {
-        gpuDrawerMaterial = new Material(Shader.Find("Hidden/DrawOnTexture"));
+        gpuDrawerMaterial = new Material(drawOnTexture);
         gpuDrawerMaterial.SetTexture("_BrushTexture", brushTexture);
         Assert.IsNotNull(drawAction);
         Assert.IsNotNull(drawPosition);
@@ -72,7 +76,8 @@ public class MouseDrawController : MonoBehaviour
 
         if (!drawTarget)
         {
-            drawTarget = new RenderTexture(srcWidth, src.height, 32);
+            drawTarget = new RenderTexture(srcWidth, src.height, 0, RenderTextureFormat.ARGB32);
+            drawTarget.useMipMap = false;
         }
 
         // TODO: Optimize this

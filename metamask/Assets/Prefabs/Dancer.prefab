@@ -117,7 +117,8 @@ MonoBehaviour:
   maskData: {fileID: 11400000, guid: d064a024fac77724ebd94093bb10d7e7, type: 2}
   outline: {fileID: 3773351679014200202}
   maskRoot: {fileID: 4002635969992269988}
-  changerMaterial: {fileID: 2100000, guid: fd80796c4c5dfcc4eb26d8f341423931, type: 2}
+  changerShader: {fileID: 4800000, guid: 56a7de10cc00d7446957b0cc536b0101, type: 3}
+  decalShader: {fileID: 2100000, guid: 0bf860b01131fd946a306832c8d6a3d9, type: 2}
   selectionFeedback: {fileID: 8850989889608232480}
 --- !u!135 &8839182415779225730
 SphereCollider:

@@ -21,7 +21,9 @@ namespace GamePlay
 
         [SerializeField] private Transform maskRoot;
 
-        [SerializeField] private Material changerMaterial;
+        [SerializeField] private Shader changerShader;
+        [SerializeField] private Material decalShader;
+        
 
 
         [FormerlySerializedAs("feedback")] [SerializeField]
@@ -48,7 +50,7 @@ namespace GamePlay
             maskData.OnMaskTextureChanged += OnMaskChanged;
             maskData.OnMaskPrefabChanged += OnMaskPrefabChanged;
 
-            targetProjector.material = new Material(Shader.Find("Shader Graphs/Decal"));
+            targetProjector.material = new Material(decalShader);
         }
 
         private void OnMaskPrefabChanged()
@@ -101,28 +103,24 @@ namespace GamePlay
 
         private void OnMaskChanged()
         {
-            if (maskData && targetProjector)
+            if (maskData && targetProjector && maskData.MaskTexture)
             {
+                RenderTexture rt = new RenderTexture(maskData.MaskTexture.width, maskData.MaskTexture.height, 0, RenderTextureFormat.ARGB32);
+                rt.useMipMap = false;
                 if (_bIsImposter)
                 {
-                    RenderTexture rt = new RenderTexture(maskData.MaskTexture.width, maskData.MaskTexture.height, 0);
-
                     Graphics.Blit(maskData.MaskTexture, rt);
                     MaskTexture = rt;
                 }
                 else
                 {
-                    if (maskData.MaskTexture)
-                    {
-                        Material flipMaterial = new Material(Shader.Find("Custom/FlipMaskTexture"));
-                        flipMaterial.SetTexture("_MainTex", maskData.MaskTexture);
-                        flipMaterial.SetFloat("_FlipVariant", Random.Range(0,8));
-                        RenderTexture rt = new RenderTexture(maskData.MaskTexture.width, maskData.MaskTexture.height, 0);
+                    Material flipMaterial = new Material(changerShader);
+                    flipMaterial.SetTexture("_MainTex", maskData.MaskTexture);
+                    flipMaterial.SetFloat("_FlipVariant", Random.Range(0, 8));
 
-                        Graphics.Blit(maskData.MaskTexture, rt, flipMaterial);
-                        Debug.Log("Applying Blit");
-                        MaskTexture = rt;
-                    }
+                    Graphics.Blit(maskData.MaskTexture, rt, flipMaterial);
+                    Debug.Log("Applying Blit");
+                    MaskTexture = rt;
                 }
             }
         }
