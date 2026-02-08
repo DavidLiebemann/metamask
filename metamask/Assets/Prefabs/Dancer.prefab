@@ -113,10 +113,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8faea6f4eac4a59af29dff6b121aed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: MetaMask::GamePlay.PlayerMaskBehaviour
-  targetProjector: {fileID: 837320440357499833}
+  targetProjector: {fileID: 8213806284188313358}
   maskData: {fileID: 11400000, guid: d064a024fac77724ebd94093bb10d7e7, type: 2}
   outline: {fileID: 3773351679014200202}
-  maskRoot: {fileID: 4699825991944397546}
+  maskRoot: {fileID: 4002635969992269988}
   changerMaterial: {fileID: 2100000, guid: fd80796c4c5dfcc4eb26d8f341423931, type: 2}
   selectionFeedback: {fileID: 8850989889608232480}
 --- !u!135 &8839182415779225730
@@ -342,7 +342,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4699825991944397546}
-  - {fileID: 1948616835114620599}
   m_Father: {fileID: 7725934815495707563}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7391689324588282562
@@ -412,96 +411,6 @@ Transform:
   - {fileID: 7725934815495707563}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &843738506882816877
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1904883416399551722}
-    m_Modifications:
-    - target: {fileID: 12188304107579604, guid: c36079034db9eb7458c4f264edb18943, type: 3}
-      propertyPath: m_ScaleMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1206805392656158170, guid: c36079034db9eb7458c4f264edb18943, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1206805392656158170, guid: c36079034db9eb7458c4f264edb18943, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1206805392656158170, guid: c36079034db9eb7458c4f264edb18943, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1206805392656158170, guid: c36079034db9eb7458c4f264edb18943, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1206805392656158170, guid: c36079034db9eb7458c4f264edb18943, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1206805392656158170, guid: c36079034db9eb7458c4f264edb18943, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1206805392656158170, guid: c36079034db9eb7458c4f264edb18943, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1206805392656158170, guid: c36079034db9eb7458c4f264edb18943, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1206805392656158170, guid: c36079034db9eb7458c4f264edb18943, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1206805392656158170, guid: c36079034db9eb7458c4f264edb18943, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1206805392656158170, guid: c36079034db9eb7458c4f264edb18943, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1206805392656158170, guid: c36079034db9eb7458c4f264edb18943, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 1206805392656158170, guid: c36079034db9eb7458c4f264edb18943, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6923954699669160242, guid: c36079034db9eb7458c4f264edb18943, type: 3}
-      propertyPath: m_Name
-      value: Decal Projector
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4266408688969622164, guid: c36079034db9eb7458c4f264edb18943, type: 3}
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c36079034db9eb7458c4f264edb18943, type: 3}
---- !u!114 &837320440357499833 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 12188304107579604, guid: c36079034db9eb7458c4f264edb18943, type: 3}
-  m_PrefabInstance: {fileID: 843738506882816877}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
---- !u!4 &1948616835114620599 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1206805392656158170, guid: c36079034db9eb7458c4f264edb18943, type: 3}
-  m_PrefabInstance: {fileID: 843738506882816877}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3717025136233949774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -823,8 +732,24 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bcce21340548544db8a498e29bf5deb, type: 3}
+--- !u!4 &4002635969992269988 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5281559541189531746, guid: 3bcce21340548544db8a498e29bf5deb, type: 3}
+  m_PrefabInstance: {fileID: 9135523661824555206}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4699825991944397546 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4611339159280556588, guid: 3bcce21340548544db8a498e29bf5deb, type: 3}
   m_PrefabInstance: {fileID: 9135523661824555206}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8213806284188313358 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1097377568900784072, guid: 3bcce21340548544db8a498e29bf5deb, type: 3}
+  m_PrefabInstance: {fileID: 9135523661824555206}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.DecalProjector
