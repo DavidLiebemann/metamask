@@ -18,6 +18,8 @@ public class CameraMirror : MonoBehaviour, IInteractable
     public Camera HandledCamera => handledCamera;
 
 
+    public static CameraMirror EnabledMirror { get; private set; }
+    
     private void Awake()
     {
         Assert.IsNotNull(handledCamera);
@@ -43,6 +45,11 @@ public class CameraMirror : MonoBehaviour, IInteractable
         foreach (Renderer rend in renderers)
         {
             rend.enabled = bShouldBeUsed;
+        }
+
+        if (bShouldBeUsed)
+        {
+            EnabledMirror = this;
         }
     }
 
